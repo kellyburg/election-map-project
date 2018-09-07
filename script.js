@@ -26,6 +26,7 @@ var createCandidate = function(candidateName, partyRgb){
     lenny.electionResults[43]=27;
     
     var setStateResults = function(state){
+    
     theStates[state].winner=null;
       if (clarisa.electionResults[state]>lenny.electionResults[state]){
           theStates[state].winner=clarisa;
@@ -41,27 +42,49 @@ var createCandidate = function(candidateName, partyRgb){
       else{
         theStates[state].rgbColor=[11, 32, 57];
       }
-    };
-    
-    
+      stateName.innerText=theStates[state].nameFull;
+      abbrev.innerText=theStates[state].nameAbbrev;
+      clarisaName.innerText=clarisa.name;
+      lennyName.innerText=lenny.name;
+      clarisaResults.innerText=clarisa.electionResults[state];
+      lennyResults.innerText=lenny.electionResults[state];
+      winnersName.innerText=(stateWinner!==null) ? stateWinner.name : "No Winner";
+     
+      };
     clarisa.tallyVotes();
     lenny.tallyVotes();
     
     
     var winner;
     if(clarisa.totalVotes>lenny.totalVotes){
-      winner="clarisa";
+      winner=clarisa;
     }
     else if (lenny.totalVotes>clarisa.totalVotes){
-      winner="lenny";
+      winner=lenny;
     }
     else{
       winner=null;
     }
-    console.log(clarisa);
+    
+    var countryResults=document.getElementById("countryResults");
+    
+    countryResults.children[0].children[0].children[0].innerText=clarisa.name;
+    countryResults.children[0].children[0].children[1].innerText=clarisa.totalVotes;
+    countryResults.children[0].children[0].children[2].innerText=lenny.name;
+    countryResults.children[0].children[0].children[3].innerText=lenny.totalVotes;
+    countryResults.children[0].children[0].children[5].innerText=winner.name;
     
     
-    
+    var stateResults= document.getElementById('stateResults');
+    var header = stateResults.children[0];
+    var body = stateResults.children[1];
+    var stateName = header.children[0].children[0];
+    var abbrev = header.children[0].children[1];
+    var clarisaName = body.children[0].children[0];
+    var lennyName = body.children[1].children[0];
+    var clarisaResults = body.children[0].children[1];
+    var lennyResults = body.children[1].children[1];
+    var winnersName = body.children[2].children[1];
     
     
     
